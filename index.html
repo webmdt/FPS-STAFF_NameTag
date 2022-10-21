@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nametag Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/css/bootstrap.min.css">
+    <style>
+    .logo{
+        height:130px;
+    }
+    .name{
+        font-size: 50px;
+    }
+    .title{
+        font-size:30px;
+    }
+    .clear{
+        clear:both;
+    }
+    .editable {
+        border-style: dotted;
+    }
+    .printout {
+        width: 11in;
+    }
+    @media print {
+        @page {size: A4 landscape; }
+        .printout {
+            margin-top:28%;
+        }
+        .webInterface, .webInterface *{
+            display: none !important;
+        }
+        
+        .editable {border-style: none;}
+    }
+    </style>
+  </head>
+  <body>
+    <div class="printout">
+        <div class="row">
+            <div class="col-md-2 text-end logoWrapper">
+                <img class="logo" src="./FPS-Logo-ICON.svg">
+            </div>
+            <div class="col-md-8 text-center nameWrapper" >
+                <span class="name editable" id="name" contentEditable="true">Mr. Marco Dominic Taddei</span>
+                <div class="clear"></div>
+                <span class="title editable" id="title" contentEditable="true">TITLE Goes Here</span>
+            </div>
+            <div class="col-md-2 text-start logoWrapper">
+                <img class="logo" src="./FPS-Logo-ICON.svg">
+            </div>
+        </div>    
+    </div><!--END .printout-->
+    <div class="webInterface">
+        <div class="p-5 mt-2 mb-2 bg-light rounded-3">
+            <div class="container py-2">
+                <h5 class="fw-bold">Font Management:</h5>
+                <p class="col-md-8 fs-4">  
+                    <div class="mb-3">
+                      <label for="fontSize_name" class="form-label">Name - Font Size</label>
+                      <input type="number" class="form-control" id="fontSize_name" placeholder="50">
+                    </div>
+                    <div class="mb-3">
+                      <label for="fontSize_title" class="form-label">Title - Font Size</label>
+                      <input type="number" class="form-control" id="fontSize_title" placeholder="30">
+                    </div>
+                </p>
+            </div>
+            <div class="p-5 mt-5 mb-2 bg-light rounded-3">
+                <div class="container py-2">
+                    <h5 class="fw-bold">How to:</h5>
+                    <p class="col-md-8 fs-4">
+                        <strong>Step 1:</strong> Click on the Persons Name, and Type in the name you'd like to Print<br/>
+                        <strong>Step 2:</strong> Change the Persons Title, if you wish to remove it just delete the text<br/>
+                        <strong>Step 3:</strong> Click FILE PRINT or Control + P or <a href="javascript:window.print()">Click here to print</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+      </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+    $( "#fontSize_name" ).change(function() {
+        var selectedFontSize_name = $("#fontSize_name" ).val();
+        updateNameFontSize(selectedFontSize_name);
+    });
+
+    $( "#fontSize_title" ).change(function() {
+        var selectedFontSize_title = $("#fontSize_title" ).val();
+        updateTitleFontSize(selectedFontSize_title);
+    });
+    
+    function updateNameFontSize(size){
+        if(size){
+            var fontSize = size + 'px';
+            $("#name").css("fontSize", fontSize);   
+        }
+    }
+    function updateTitleFontSize(size){ 
+        if(size){
+            var fontSize = size + 'px';
+            $("#title").css("fontSize", fontSize);   
+        }
+    }
+    </script>
+  </body>
+</html>
